@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Registration | BloodLink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f8f8f8;
+            color: #171717;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            font-family: inherit;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 75px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            height: 100%;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #d71920;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo i {
+            font-size: 27px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #666;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .back-link:hover {
+            color: #d71920;
+        }
+
+        /* HEADER */
+
+        .page-header {
+            padding: 55px 20px 45px;
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    #ffdfe0,
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff3f3,
+                    white
+                );
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+            border-radius: 50px;
+
+            background: #ffe5e6;
+            color: #c5161d;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(30px, 5vw, 46px);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .page-header h1 span {
+            color: #d71920;
+        }
+
+        .page-header p {
+            max-width: 650px;
+            margin: auto;
+
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* MAIN */
+
+        .main {
+            max-width: 900px;
+            margin: auto;
+            padding: 35px 20px 80px;
+        }
+
+        .form-card {
+            background: white;
+
+            border: 1px solid #eee;
+            border-radius: 18px;
+
+            padding: 32px;
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding-bottom: 17px;
+            border-bottom: 1px solid #eee;
+
+            margin-bottom: 24px;
+        }
+
+        .section-icon {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 11px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title h2 {
+            font-size: 17px;
+        }
+
+        .section-title p {
+            color: #999;
+            font-size: 10px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #d71920;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ddd;
+            border-radius: 9px;
+
+            outline: none;
+
+            background: white;
+            color: #222;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #d71920;
+
+            box-shadow:
+                0 0 0 3px rgba(215, 25, 32, 0.08);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .help {
+            color: #999;
+            font-size: 9px;
+            margin-top: 5px;
+        }
+
+        /* BLOOD GROUP */
+
+        .blood-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 9px;
+        }
+
+        .blood-option input {
+            display: none;
+        }
+
+        .blood-option label {
+            margin: 0;
+
+            padding: 12px 5px;
+
+            border: 1px solid #ddd;
+            border-radius: 9px;
+
+            text-align: center;
+            cursor: pointer;
+
+            color: #555;
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
+
+        .blood-option input:checked + label {
+            background: #d71920;
+            border-color: #d71920;
+            color: white;
+        }
+
+        /* BUTTON */
+
+        .submit-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #d71920;
+            color: white;
+
+            padding: 16px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(215, 25, 32, 0.18);
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b51218;
+            transform: translateY(-2px);
+        }
+
+        .submit-note {
+            text-align: center;
+
+            color: #999;
+            font-size: 9px;
+
+            margin-top: 10px;
+        }
+
+        /* SUCCESS */
+
+        .success-box {
+            display: none;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #e8f8ec;
+            color: #28a745;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .success-box h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .success-box p {
+            color: #777;
+            font-size: 12px;
+
+            max-width: 500px;
+            margin: auto auto 20px;
+        }
+
+        .dashboard-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #d71920;
+            color: white;
+
+            padding: 12px 20px;
+            border-radius: 9px;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+
+            text-align: center;
+
+            padding: 28px 20px;
+        }
+
+        footer p {
+            color: #777;
+            font-size: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .form-card {
+                padding: 23px 18px;
+            }
+
+            .blood-options {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .back-link {
+                font-size: 10px;
+            }
+
+            .main {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .blood-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-droplet"></i>
+                BloodLink
+            </a>
+
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="badge">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            Blood Donor Registration
+        </div>
+
+        <h1>
+            Become a <span>Donor</span>
+        </h1>
+
+        <p>
+            Register as a blood donor and help connect with
+            people who need your blood group.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <form id="donorRegistrationForm">
+
+            <!-- PERSONAL INFORMATION -->
+
+            <div class="form-card">
+
+                <div class="section-title">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <h2>Personal Information</h2>
+                        <p>Enter your basic details.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Full Name -->
+
+                    <div class="form-group full">
+
+                        <label for="fullName">
+                            Full Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Date of Birth -->
+
+                    <div class="form-group">
+
+                        <label for="dateOfBirth">
+                            Date of Birth
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Gender -->
+
+                    <div class="form-group">
+
+                        <label for="gender">
+                            Gender
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="gender"
+                            name="gender"
+                            required
+                        >
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BLOOD INFORMATION -->
+
+            <div class="form-card">
+
+                <div class="section-title">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <div>
+                        <h2>Blood Information</h2>
+                        <p>Select your blood group.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Blood Group
+                        <span class="required">*</span>
+                    </label>
+
+
+                    <div class="blood-options">
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="aPositive"
+                                name="bloodGroup"
+                                value="A+"
+                                required
+                            >
+                            <label for="aPositive">A+</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="aNegative"
+                                name="bloodGroup"
+                                value="A-"
+                            >
+                            <label for="aNegative">A-</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="bPositive"
+                                name="bloodGroup"
+                                value="B+"
+                            >
+                            <label for="bPositive">B+</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="bNegative"
+                                name="bloodGroup"
+                                value="B-"
+                            >
+                            <label for="bNegative">B-</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="abPositive"
+                                name="bloodGroup"
+                                value="AB+"
+                            >
+                            <label for="abPositive">AB+</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="abNegative"
+                                name="bloodGroup"
+                                value="AB-"
+                            >
+                            <label for="abNegative">AB-</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="oPositive"
+                                name="bloodGroup"
+                                value="O+"
+                            >
+                            <label for="oPositive">O+</label>
+                        </div>
+
+                        <div class="blood-option">
+                            <input
+                                type="radio"
+                                id="oNegative"
+                                name="bloodGroup"
+                                value="O-"
+                            >
+                            <label for="oNegative">O-</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT INFORMATION -->
+
+            <div class="form-card">
+
+                <div class="section-title">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+
+                    <div>
+                        <h2>Contact Information</h2>
+                        <p>How can BloodLink contact you?</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="phoneNumber">
+                            Phone Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            placeholder="10-digit mobile number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="emailAddress">
+                            Email Address
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="emailAddress"
+                            name="emailAddress"
+                            placeholder="example@email.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-card">
+
+                <div class="section-title">
+
+                    <div class="section-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div>
+                        <h2>Location</h2>
+                        <p>This helps us find nearby blood requests.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Address -->
+
+                    <div class="form-group full">
+
+                        <label for="address">
+                            Address
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Enter your address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- City -->
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="e.g. Jaipur"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- State -->
+
+                    <div class="form-group">
+
+                        <label for="state">
+                            State
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="state"
+                            name="state"
+                            required
+                        >
+
+                            <option value="">
+                                Select State
+                            </option>
+
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Uttar Pradesh">
+                                Uttar Pradesh
+                            </option>
+                            <option value="Madhya Pradesh">
+                                Madhya Pradesh
+                            </option>
+                            <option value="Maharashtra">
+                                Maharashtra
+                            </option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Pincode -->
+
+                    <div class="form-group">
+
+                        <label for="pincode">
+                            Pincode
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pincode"
+                            name="pincode"
+                            pattern="[0-9]{6}"
+                            maxlength="6"
+                            placeholder="6-digit pincode"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRMATION -->
+
+            <div class="form-card">
+
+                <div style="
+                    display:flex;
+                    align-items:flex-start;
+                    gap:10px;
+                    margin-bottom:22px;
+                ">
+
+                    <input
+                        type="checkbox"
+                        id="confirmation"
+                        required
+                        style="
+                            width:auto;
+                            margin-top:4px;
+                            accent-color:#d71920;
+                        "
+                    >
+
+                    <label
+                        for="confirmation"
+                        style="
+                            color:#777;
+                            font-size:10px;
+                            font-weight:500;
+                            margin:0;
+                        "
+                    >
+
+                        I confirm that the information provided by me
+                        is accurate and I am registering voluntarily as
+                        a blood donor.
+
+                    </label>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    Register as Blood Donor
+
+                </button>
+
+
+                <p class="submit-note">
+
+                    Your information will be stored securely
+                    after connecting the Supabase backend.
+
+                </p>
+
+            </div>
+
+        </form>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            class="form-card success-box"
+            id="successBox"
+        >
+
+            <div class="success-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+            <h2>
+                Registration Successful
+            </h2>
+
+            <p>
+
+                Your donor registration has been submitted.
+                You can now continue to your donor dashboard.
+
+            </p>
+
+            <a
+                href="donor-dashboard.html"
+                class="dashboard-btn"
+            >
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                Go to Donor Dashboard
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 BloodLink. Built to connect people and save lives.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+
+    <script type="module" src="java/donor.js"></script>
+
+</body>
+
+</html>

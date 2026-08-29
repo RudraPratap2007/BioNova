@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital Registration | BloodLink</title>
+
+    <meta name="description"
+          content="Register your hospital with BloodLink for verified blood requests.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #fafafa;
+            color: #171717;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 75px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            height: 100%;
+            margin: auto;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #d71920;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo i {
+            font-size: 27px;
+        }
+
+        .back-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #555;
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: #d71920;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    #ffe0e1,
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff3f3,
+                    #ffffff
+                );
+
+            padding: 65px 25px 50px;
+            text-align: center;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 15px;
+            border-radius: 50px;
+
+            background: #ffe5e6;
+            color: #c5161d;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 span {
+            color: #d71920;
+        }
+
+        .page-header p {
+            max-width: 650px;
+            margin: auto;
+
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* MAIN */
+
+        .registration-section {
+            padding: 45px 20px 80px;
+        }
+
+        .registration-container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        /* VERIFICATION NOTE */
+
+        .verification-note {
+            background: #fff8e8;
+            border: 1px solid #f3dfad;
+            border-radius: 12px;
+
+            padding: 17px 20px;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .verification-note i {
+            color: #c38b00;
+            margin-top: 3px;
+        }
+
+        .verification-note strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .verification-note p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* FORM CARD */
+
+        .form-card {
+            background: white;
+
+            border: 1px solid #eeeeee;
+            border-radius: 20px;
+
+            padding: 40px;
+
+            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+
+            margin-bottom: 25px;
+        }
+
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .section-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+        }
+
+        .form-section-title h2 {
+            font-size: 18px;
+        }
+
+        .form-section-title p {
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* FORM GRID */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #d71920;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            border: 1px solid #ddd;
+            border-radius: 9px;
+
+            background: #fff;
+
+            padding: 13px 14px;
+
+            font-size: 13px;
+            color: #222;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #d71920;
+
+            box-shadow:
+                0 0 0 3px rgba(215,25,32,0.08);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .input-help {
+            color: #999;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        /* PASSWORD */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: none;
+
+            color: #999;
+            cursor: pointer;
+        }
+
+        /* FILE UPLOAD */
+
+        .upload-box {
+            border: 1.5px dashed #d9d9d9;
+
+            border-radius: 12px;
+
+            padding: 25px 20px;
+
+            text-align: center;
+
+            background: #fcfcfc;
+
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            border-color: #d71920;
+            background: #fffafa;
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 12px;
+
+            font-size: 19px;
+        }
+
+        .upload-box h3 {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .upload-box p {
+            color: #999;
+            font-size: 10px;
+            margin-bottom: 13px;
+        }
+
+        .file-label {
+            display: inline-block;
+
+            padding: 9px 15px;
+
+            background: #111;
+            color: white;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .file-label:hover {
+            background: #d71920;
+        }
+
+        .file-label input {
+            display: none;
+        }
+
+        .file-name {
+            color: #d71920;
+            font-size: 10px;
+            margin-top: 8px;
+            word-break: break-word;
+        }
+
+        /* CHECKBOX */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .terms input {
+            width: auto;
+            margin-top: 3px;
+            accent-color: #d71920;
+        }
+
+        .terms label {
+            margin: 0;
+
+            color: #777;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .terms a {
+            color: #d71920;
+            font-weight: 700;
+        }
+
+        /* SUBMIT */
+
+        .submit-area {
+            text-align: center;
+            padding: 10px 0 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 16px;
+
+            border-radius: 10px;
+
+            background: #d71920;
+            color: white;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            box-shadow:
+                0 10px 25px rgba(215,25,32,0.18);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b51218;
+            transform: translateY(-2px);
+        }
+
+        .submit-note {
+            margin-top: 12px;
+            color: #999;
+            font-size: 10px;
+        }
+
+        /* LOGIN */
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #777;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #d71920;
+            font-weight: 800;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+
+            padding: 30px 20px;
+
+            text-align: center;
+        }
+
+        footer p {
+            color: #777;
+            font-size: 11px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .page-header {
+                padding: 50px 20px 40px;
+            }
+
+            .verification-note {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .nav-container {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .back-home {
+                font-size: 12px;
+            }
+
+            .registration-section {
+                padding: 25px 12px 60px;
+            }
+
+            .form-card {
+                border-radius: 15px;
+                padding: 22px 17px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-droplet"></i>
+                BloodLink
+            </a>
+
+            <a href="index.html" class="back-home">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="page-badge">
+            <i class="fa-solid fa-hospital"></i>
+            Hospital Registration
+        </div>
+
+        <h1>
+            Join the <span>BloodLink</span> Network
+        </h1>
+
+        <p>
+            Register your hospital to connect with eligible blood donors
+            and raise verified blood requirements during emergencies.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN -->
+
+    <main class="registration-section">
+
+        <div class="registration-container">
+
+            <!-- VERIFICATION NOTE -->
+
+            <div class="verification-note">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <div>
+
+                    <strong>
+                        Hospital Verification Required
+                    </strong>
+
+                    <p>
+                        Your hospital profile will be reviewed before you
+                        can create blood requests on BloodLink.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="hospitalForm">
+
+                <!-- HOSPITAL INFORMATION -->
+
+                <div class="form-card">
+
+                    <div class="form-section-title">
+
+                        <div class="section-icon">
+                            <i class="fa-solid fa-hospital"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>Hospital Information</h2>
+
+                            <p>
+                                Enter your hospital's official details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <!-- Hospital Name -->
+
+                        <div class="form-group full-width">
+
+                            <label for="hospitalName">
+                                Hospital Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="hospitalName"
+                                name="hospitalName"
+                                placeholder="Enter official hospital name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Registration Number -->
+
+                        <div class="form-group">
+
+                            <label for="registrationNumber">
+                                Hospital Registration Number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="registrationNumber"
+                                name="registrationNumber"
+                                placeholder="e.g. HOSP/2026/001"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Hospital Type -->
+
+                        <div class="form-group">
+
+                            <label for="hospitalType">
+                                Hospital Type
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="hospitalType"
+                                name="hospitalType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select hospital type
+                                </option>
+
+                                <option value="government">
+                                    Government Hospital
+                                </option>
+
+                                <option value="private">
+                                    Private Hospital
+                                </option>
+
+                                <option value="trust">
+                                    Trust / NGO Hospital
+                                </option>
+
+                                <option value="blood_bank">
+                                    Blood Bank / Medical Centre
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Hospital Contact Number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="10-digit hospital number"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Official Email Address
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="hospital@example.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Address -->
+
+                        <div class="form-group full-width">
+
+                            <label for="address">
+                                Full Hospital Address
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                id="address"
+                                name="address"
+                                placeholder="Enter complete hospital address"
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- City -->
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="e.g. Jaipur"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- State -->
+
+                        <div class="form-group">
+
+                            <label for="state">
+                                State
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="state"
+                                name="state"
+                                required
+                            >
+
+                                <option value="">
+                                    Select state
+                                </option>
+
+                                <option value="Rajasthan">
+                                    Rajasthan
+                                </option>
+
+                                <option value="Delhi">
+                                    Delhi
+                                </option>
+
+                                <option value="Haryana">
+                                    Haryana
+                                </option>
+
+                                <option value="Uttar Pradesh">
+                                    Uttar Pradesh
+                                </option>
+
+                                <option value="Madhya Pradesh">
+                                    Madhya Pradesh
+                                </option>
+
+                                <option value="Maharashtra">
+                                    Maharashtra
+                                </option>
+
+                                <option value="Gujarat">
+                                    Gujarat
+                                </option>
+
+                                <option value="Punjab">
+                                    Punjab
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Pincode -->
+
+                        <div class="form-group">
+
+                            <label for="pincode">
+                                Pincode
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                placeholder="6-digit pincode"
+                                pattern="[0-9]{6}"
+                                maxlength="6"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Blood Bank -->
+
+                        <div class="form-group">
+
+                            <label for="bloodBank">
+                                Blood Bank Available?
+                            </label>
+
+                            <select
+                                id="bloodBank"
+                                name="bloodBank"
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="yes">
+                                    Yes
+                                </option>
+
+                                <option value="no">
+                                    No
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AUTHORIZED PERSON -->
+
+                <div class="form-card">
+
+                    <div class="form-section-title">
+
+                        <div class="section-icon">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>Authorized Person</h2>
+
+                            <p>
+                                Details of the person responsible for this account.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="authorizedName">
+                                Full Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="authorizedName"
+                                name="authorizedName"
+                                placeholder="Authorized person's name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="designation">
+                                Designation
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="designation"
+                                name="designation"
+                                placeholder="e.g. Hospital Administrator"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="authorizedPhone">
+                                Contact Number
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="authorizedPhone"
+                                name="authorizedPhone"
+                                placeholder="10-digit mobile number"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="authorizedEmail">
+                                Email
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="authorizedEmail"
+                                name="authorizedEmail"
+                                placeholder="official email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DOCUMENTS -->
+
+                <div class="form-card">
+
+                    <div class="form-section-title">
+
+                        <div class="section-icon">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>Verification Documents</h2>
+
+                            <p>
+                                Upload documents to verify your hospital.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <!-- Registration Certificate -->
+
+                        <div class="form-group">
+
+                            <label for="registrationDocument">
+                                Hospital Registration Certificate
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="upload-box">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-file-medical"></i>
+                                </div>
+
+                                <h3>
+                                    Registration Certificate
+                                </h3>
+
+                                <p>
+                                    PDF, JPG or PNG • Max 5MB
+                                </p>
+
+                                <label class="file-label">
+
+                                    Choose File
+
+                                    <input
+                                        type="file"
+                                        id="registrationDocument"
+                                        name="registrationDocument"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        required
+                                    >
+
+                                </label>
+
+                                <div
+                                    class="file-name"
+                                    id="registrationFileName">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- License -->
+
+                        <div class="form-group">
+
+                            <label for="licenseDocument">
+                                Hospital / Medical License
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="upload-box">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-file-circle-check"></i>
+                                </div>
+
+                                <h3>
+                                    License Document
+                                </h3>
+
+                                <p>
+                                    PDF, JPG or PNG • Max 5MB
+                                </p>
+
+                                <label class="file-label">
+
+                                    Choose File
+
+                                    <input
+                                        type="file"
+                                        id="licenseDocument"
+                                        name="licenseDocument"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        required
+                                    >
+
+                                </label>
+
+                                <div
+                                    class="file-name"
+                                    id="licenseFileName">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Hospital Photo -->
+
+                        <div class="form-group">
+
+                            <label for="hospitalPhoto">
+                                Hospital Photo
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="upload-box">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-image"></i>
+                                </div>
+
+                                <h3>
+                                    Hospital Building Photo
+                                </h3>
+
+                                <p>
+                                    JPG or PNG • Max 5MB
+                                </p>
+
+                                <label class="file-label">
+
+                                    Choose Photo
+
+                                    <input
+                                        type="file"
+                                        id="hospitalPhoto"
+                                        name="hospitalPhoto"
+                                        accept=".jpg,.jpeg,.png"
+                                        required
+                                    >
+
+                                </label>
+
+                                <div
+                                    class="file-name"
+                                    id="hospitalPhotoName">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Authorized ID -->
+
+                        <div class="form-group">
+
+                            <label for="authorizedId">
+                                Authorized Person ID
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="upload-box">
+
+                                <div class="upload-icon">
+                                    <i class="fa-solid fa-id-card"></i>
+                                </div>
+
+                                <h3>
+                                    Identity Document
+                                </h3>
+
+                                <p>
+                                    PDF, JPG or PNG • Max 5MB
+                                </p>
+
+                                <label class="file-label">
+
+                                    Choose File
+
+                                    <input
+                                        type="file"
+                                        id="authorizedId"
+                                        name="authorizedId"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        required
+                                    >
+
+                                </label>
+
+                                <div
+                                    class="file-name"
+                                    id="authorizedIdName">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCOUNT SECURITY -->
+
+                <div class="form-card">
+
+                    <div class="form-section-title">
+
+                        <div class="section-icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>Account Security</h2>
+
+                            <p>
+                                Create your hospital login credentials.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <!-- Password -->
+
+                        <div class="form-group">
+
+                            <label for="password">
+                                Create Password
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create a strong password"
+                                    minlength="8"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('password','eye1')">
+
+                                    <i
+                                        class="fa-solid fa-eye"
+                                        id="eye1">
+                                    </i>
+
+                                </button>
+
+                            </div>
+
+                            <span class="input-help">
+                                Minimum 8 characters.
+                            </span>
+
+                        </div>
+
+
+                        <!-- Confirm Password -->
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Re-enter password"
+                                    minlength="8"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('confirmPassword','eye2')">
+
+                                    <i
+                                        class="fa-solid fa-eye"
+                                        id="eye2">
+                                    </i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="form-card">
+
+                    <div class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required
+                        >
+
+                        <label for="terms">
+
+                            I confirm that the information and documents
+                            provided are genuine and belong to the hospital.
+                            I agree to BloodLink's
+                            <a href="#">
+                                Terms & Verification Policy
+                            </a>.
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <div class="submit-area">
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Submit for Verification
+
+                    </button>
+
+                    <p class="submit-note">
+
+                        Your account will remain under verification
+                        until the submitted information is reviewed.
+
+                    </p>
+
+                </div>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <p class="login-link">
+
+                Already registered?
+
+                <a href="login.html">
+                    Login to your account
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 BloodLink. Built to connect people and save lives.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Show selected file name
+
+        function showFileName(input, outputId) {
+
+            const output = document.getElementById(outputId);
+
+            if (input.files && input.files.length > 0) {
+
+                const file = input.files[0];
+
+                output.textContent = "✓ " + file.name;
+
+            } else {
+
+                output.textContent = "";
+
+            }
+        }
+
+
+        // File size validation
+
+        function validateFileSize(input) {
+
+            if (input.files && input.files.length > 0) {
+
+                const file = input.files[0];
+
+                const maxSize = 5 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+
+                    alert("File size must be less than 5MB.");
+
+                    input.value = "";
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        // Password show/hide
+
+        function togglePassword(inputId, iconId) {
+
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+
+            }
+        }
+
+
+        // File inputs
+
+        document
+            .getElementById("registrationDocument")
+            .addEventListener("change", function() {
+
+                if (validateFileSize(this)) {
+                    showFileName(this, "registrationFileName");
+                }
+
+            });
+
+
+        document
+            .getElementById("licenseDocument")
+            .addEventListener("change", function() {
+
+                if (validateFileSize(this)) {
+                    showFileName(this, "licenseFileName");
+                }
+
+            });
+
+
+        document
+            .getElementById("hospitalPhoto")
+            .addEventListener("change", function() {
+
+                if (validateFileSize(this)) {
+                    showFileName(this, "hospitalPhotoName");
+                }
+
+            });
+
+
+        document
+            .getElementById("authorizedId")
+            .addEventListener("change", function() {
+
+                if (validateFileSize(this)) {
+                    showFileName(this, "authorizedIdName");
+                }
+
+            });
+
+
+    </script>
+
+<script type="module" src="java/hospital-auth.js"></script>
+</body>
+</html>

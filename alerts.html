@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alerts | BloodLink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f7f7f8;
+            color: #171717;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 245px;
+            height: 100vh;
+
+            background: #111;
+            color: white;
+
+            padding: 25px 16px;
+
+            z-index: 1000;
+
+            transition: 0.3s;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #ff4a50;
+
+            font-size: 23px;
+            font-weight: 800;
+
+            padding: 0 10px;
+
+            margin-bottom: 40px;
+        }
+
+
+        .logo i {
+            font-size: 26px;
+        }
+
+
+        .menu-title {
+            color: #777;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            padding: 0 12px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+
+        .sidebar-menu a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 12px;
+
+            border-radius: 9px;
+
+            color: #aaa;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+        }
+
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #d71920;
+            color: white;
+        }
+
+
+        .sidebar-bottom {
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 16px;
+            right: 16px;
+        }
+
+
+        .sidebar-bottom a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px;
+
+            color: #999;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        .sidebar-bottom a:hover {
+            color: white;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+
+            min-height: 100vh;
+        }
+
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+            height: 75px;
+
+            background: white;
+
+            border-bottom: 1px solid #eee;
+
+            padding: 0 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 900;
+        }
+
+
+        .mobile-menu {
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 21px;
+        }
+
+
+        .page-title h1 {
+            font-size: 20px;
+
+            margin-bottom: 2px;
+        }
+
+
+        .page-title p {
+            color: #999;
+
+            font-size: 11px;
+        }
+
+
+        .topbar-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .notification {
+            position: relative;
+
+            border: none;
+
+            background: none;
+
+            font-size: 18px;
+
+            color: #555;
+        }
+
+
+        .notification-badge {
+            position: absolute;
+
+            top: -6px;
+            right: -7px;
+
+            width: 16px;
+            height: 16px;
+
+            background: #d71920;
+
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .donor-profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .profile-icon {
+            width: 38px;
+            height: 38px;
+
+            background: #ffe6e7;
+
+            color: #d71920;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+        }
+
+
+        .profile-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        .profile-status {
+            font-size: 9px;
+            color: #28a745;
+        }
+
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            max-width: 1050px;
+
+            margin: auto;
+
+            padding: 30px;
+        }
+
+
+        /* ================= PAGE INTRO ================= */
+
+        .intro {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+
+        .intro h2 {
+            font-size: 23px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .intro p {
+            color: #999;
+
+            font-size: 11px;
+        }
+
+
+        .mark-read {
+            border: 1px solid #ddd;
+
+            background: white;
+
+            color: #555;
+
+            padding: 10px 14px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+
+        .mark-read:hover {
+            border-color: #d71920;
+
+            color: #d71920;
+        }
+
+
+        /* ================= SUMMARY ================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .summary-card {
+            background: white;
+
+            border: 1px solid #eee;
+
+            border-radius: 13px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .summary-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: #ffe7e8;
+
+            color: #d71920;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .summary-card h3 {
+            font-size: 20px;
+        }
+
+
+        .summary-card p {
+            color: #999;
+
+            font-size: 9px;
+        }
+
+
+        /* ================= ALERT CARD ================= */
+
+        .alerts-card {
+            background: white;
+
+            border: 1px solid #eee;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+        }
+
+
+        .alerts-header {
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #eee;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .alerts-header h3 {
+            font-size: 15px;
+        }
+
+
+        .filter {
+            border: 1px solid #ddd;
+
+            background: white;
+
+            padding: 8px 11px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+
+            outline: none;
+        }
+
+
+        /* ================= ALERT ITEM ================= */
+
+        .alert-item {
+            display: flex;
+
+            gap: 15px;
+
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #eee;
+
+            transition: 0.25s;
+
+            position: relative;
+        }
+
+
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .alert-item:hover {
+            background: #fffafa;
+        }
+
+
+        .alert-item.unread {
+            background: #fff8f8;
+        }
+
+
+        .alert-item.unread::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background: #d71920;
+        }
+
+
+        .alert-icon {
+            width: 45px;
+            height: 45px;
+
+            min-width: 45px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        .alert-icon.blood {
+            background: #ffe5e6;
+            color: #d71920;
+        }
+
+
+        .alert-icon.urgent {
+            background: #fff0d9;
+            color: #c27b00;
+        }
+
+
+        .alert-icon.success {
+            background: #e7f8eb;
+            color: #28a745;
+        }
+
+
+        .alert-icon.info {
+            background: #e9f2ff;
+            color: #2878c7;
+        }
+
+
+        .alert-content {
+            flex: 1;
+        }
+
+
+        .alert-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .alert-content h4 {
+            font-size: 12px;
+        }
+
+
+        .alert-time {
+            color: #aaa;
+
+            font-size: 8px;
+
+            white-space: nowrap;
+        }
+
+
+        .alert-content p {
+            color: #777;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            margin-bottom: 9px;
+        }
+
+
+        .alert-details {
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+        }
+
+
+        .tag {
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            background: #f4f4f4;
+
+            color: #555;
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+
+        .tag.red {
+            background: #ffe5e6;
+
+            color: #d71920;
+        }
+
+
+        .alert-action {
+            margin-top: 10px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            border: none;
+
+            background: #d71920;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        .alert-action:hover {
+            background: #b51218;
+        }
+
+
+        .dismiss-btn {
+            position: absolute;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            border: none;
+
+            background: none;
+
+            color: #aaa;
+
+            font-size: 10px;
+        }
+
+
+        .dismiss-btn:hover {
+            color: #d71920;
+        }
+
+
+        /* ================= EMPTY STATE ================= */
+
+        .empty-state {
+            display: none;
+
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #f1f1f1;
+
+            color: #aaa;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .empty-state h3 {
+            font-size: 16px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .empty-state p {
+            color: #999;
+
+            font-size: 10px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                left: -245px;
+            }
+
+
+            .sidebar.open {
+                left: 0;
+            }
+
+
+            .main {
+                margin-left: 0;
+            }
+
+
+            .mobile-menu {
+                display: block;
+            }
+
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+
+            .content {
+                padding: 22px 15px;
+            }
+
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .profile-name {
+                display: none;
+            }
+
+
+            .intro {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+
+            .alert-item {
+                padding: 17px 15px;
+            }
+
+
+            .alert-top {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 2px;
+            }
+
+
+            .dismiss-btn {
+                right: 12px;
+
+                bottom: 15px;
+            }
+
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-droplet"></i>
+
+            BloodLink
+
+        </a>
+
+
+        <div class="menu-title">
+            Donor Panel
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+
+            <li>
+
+                <a href="donor-dashboard.html">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="donor-dashboard.html#requests">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                    Blood Requests
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="alerts.html" class="active">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                    Alerts
+
+                    <span
+                        id="sidebarCount"
+                        style="
+                        margin-left:auto;
+                        background:#d71920;
+                        padding:3px 6px;
+                        border-radius:10px;
+                        font-size:9px;">
+                        3
+                    </span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="donor-dashboard.html#history">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    Donation History
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="donor-dashboard.html#profile">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+        <div class="sidebar-bottom">
+
+
+            <a href="index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                Back to Website
+
+            </a>
+
+
+            <a href="#" onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- ================= TOPBAR ================= -->
+
+        <header class="topbar">
+
+
+            <div
+                style="
+                display:flex;
+                align-items:center;
+                gap:15px;">
+
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Alerts
+                    </h1>
+
+                    <p>
+                        Stay updated about blood requirements near you
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <button
+                    class="notification"
+                    onclick="scrollToAlerts()">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span
+                        class="notification-badge"
+                        id="topBadge">
+
+                        3
+
+                    </span>
+
+                </button>
+
+
+                <div class="donor-profile">
+
+
+                    <div class="profile-icon">
+                        RS
+                    </div>
+
+
+                    <div>
+
+                        <div class="profile-name">
+                            Rahul Sharma
+                        </div>
+
+                        <div class="profile-status">
+                            ● Available to Donate
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= INTRO ================= -->
+
+            <div class="intro">
+
+
+                <div>
+
+                    <h2>
+                        Your Alerts
+                    </h2>
+
+                    <p>
+                        Blood requests matching your profile will appear here.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="mark-read"
+                    onclick="markAllRead()">
+
+                    <i class="fa-solid fa-check-double"></i>
+
+                    Mark all as read
+
+                </button>
+
+
+            </div>
+
+
+            <!-- ================= SUMMARY ================= -->
+
+            <div class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3 id="totalAlerts">
+                            3
+                        </h3>
+
+                        <p>
+                            Total Alerts
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-droplet"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            2
+                        </h3>
+
+                        <p>
+                            Matching Blood Requests
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            1
+                        </h3>
+
+                        <p>
+                            Urgent Request
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= ALERTS ================= -->
+
+            <section
+                class="alerts-card"
+                id="alertsSection">
+
+
+                <div class="alerts-header">
+
+
+                    <h3>
+                        Recent Notifications
+                    </h3>
+
+
+                    <select
+                        class="filter"
+                        id="alertFilter"
+                        onchange="filterAlerts()">
+
+                        <option value="all">
+                            All Alerts
+                        </option>
+
+                        <option value="blood">
+                            Blood Requests
+                        </option>
+
+                        <option value="urgent">
+                            Urgent
+                        </option>
+
+                        <option value="system">
+                            System
+
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+
+                <!-- ALERT 1 -->
+
+                <div
+                    class="alert-item unread"
+                    data-type="urgent"
+                    id="alert1">
+
+
+                    <div class="alert-icon urgent">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="alert-content">
+
+
+                        <div class="alert-top">
+
+                            <h4>
+                                Urgent O+ Blood Required
+                            </h4>
+
+                            <span class="alert-time">
+                                15 min ago
+                            </span>
+
+                        </div>
+
+
+                        <p>
+
+                            City Care Hospital near you has requested
+                            O+ blood for an emergency patient.
+
+                        </p>
+
+
+                        <div class="alert-details">
+
+                            <span class="tag red">
+                                O+ Blood
+                            </span>
+
+                            <span class="tag">
+                                2 Units
+                            </span>
+
+                            <span class="tag">
+                                3.2 km away
+                            </span>
+
+                            <span class="tag">
+                                Emergency
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="alert-action"
+                            onclick="acceptRequest('City Care Hospital','O+','2')">
+
+                            <i class="fa-solid fa-hand-holding-droplet"></i>
+
+                            I Can Donate
+
+                        </button>
+
+
+                    </div>
+
+
+                    <button
+                        class="dismiss-btn"
+                        onclick="dismissAlert('alert1')"
+                        title="Dismiss">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ALERT 2 -->
+
+                <div
+                    class="alert-item unread"
+                    data-type="blood"
+                    id="alert2">
+
+
+                    <div class="alert-icon blood">
+
+                        <i class="fa-solid fa-droplet"></i>
+
+                    </div>
+
+
+                    <div class="alert-content">
+
+
+                        <div class="alert-top">
+
+                            <h4>
+                                New Blood Request Near You
+                            </h4>
+
+                            <span class="alert-time">
+                                32 min ago
+                            </span>
+
+                        </div>
+
+
+                        <p>
+
+                            Sunrise Medical Centre needs O+ blood.
+                            You are a potential match for this request.
+
+                        </p>
+
+
+                        <div class="alert-details">
+
+                            <span class="tag red">
+                                O+ Blood
+                            </span>
+
+                            <span class="tag">
+                                1 Unit
+                            </span>
+
+                            <span class="tag">
+                                5.7 km away
+                            </span>
+
+                            <span class="tag">
+                                Surgery
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="alert-action"
+                            onclick="acceptRequest('Sunrise Medical Centre','O+','1')">
+
+                            <i class="fa-solid fa-hand-holding-droplet"></i>
+
+                            I Can Donate
+
+                        </button>
+
+
+                    </div>
+
+
+                    <button
+                        class="dismiss-btn"
+                        onclick="dismissAlert('alert2')"
+                        title="Dismiss">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ALERT 3 -->
+
+                <div
+                    class="alert-item unread"
+                    data-type="system"
+                    id="alert3">
+
+
+                    <div class="alert-icon success">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="alert-content">
+
+
+                        <div class="alert-top">
+
+                            <h4>
+                                Donation Record Updated
+                            </h4>
+
+                            <span class="alert-time">
+                                2 hours ago
+                            </span>
+
+                        </div>
+
+
+                        <p>
+
+                            Your previous donation record has been
+                            successfully updated in your profile.
+
+                        </p>
+
+
+                        <div class="alert-details">
+
+                            <span class="tag">
+                                Donation History
+                            </span>
+
+                            <span class="tag">
+                                Completed
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="dismiss-btn"
+                        onclick="dismissAlert('alert3')"
+                        title="Dismiss">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ALERT 4 -->
+
+                <div
+                    class="alert-item"
+                    data-type="system"
+                    id="alert4">
+
+
+                    <div class="alert-icon info">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    </div>
+
+
+                    <div class="alert-content">
+
+
+                        <div class="alert-top">
+
+                            <h4>
+                                Donor Availability Reminder
+                            </h4>
+
+                            <span class="alert-time">
+                                Yesterday
+                            </span>
+
+                        </div>
+
+
+                        <p>
+
+                            Your donor availability is currently ON.
+                            You will receive alerts for matching requests.
+
+                        </p>
+
+
+                        <div class="alert-details">
+
+                            <span class="tag">
+                                Availability
+                            </span>
+
+                            <span class="tag">
+                                Active
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        class="dismiss-btn"
+                        onclick="dismissAlert('alert4')"
+                        title="Dismiss">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="empty-state"
+                    id="emptyState">
+
+                    <div class="empty-icon">
+
+                        <i class="fa-regular fa-bell-slash"></i>
+
+                    </div>
+
+
+                    <h3>
+                        No Alerts Found
+                    </h3>
+
+
+                    <p>
+                        There are no notifications in this category.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        /* ================= SIDEBAR ================= */
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            sidebar.classList.toggle("open");
+
+        }
+
+
+        /* ================= ACCEPT REQUEST ================= */
+
+        function acceptRequest(
+            hospital,
+            bloodGroup,
+            units
+        ) {
+
+
+            const confirmAccept = confirm(
+
+                "Do you want to accept this blood request?\n\n" +
+
+                "Hospital: " +
+                hospital +
+
+                "\nBlood Group: " +
+                bloodGroup +
+
+                "\nUnits: " +
+                units
+
+            );
+
+
+            if (confirmAccept) {
+
+
+                alert(
+
+                    "Request Accepted!\n\n" +
+
+                    hospital +
+
+                    " has been notified that you are willing to donate."
+
+                );
+
+
+                /*
+                    ======================================
+                    SUPABASE LOGIC WILL BE ADDED HERE
+                    ======================================
+
+                    Later we will save something like:
+
+                    donor_id
+                    request_id
+                    status = "accepted"
+
+                    into a donor_responses table.
+
+                    Hospital dashboard will then show:
+
+                    "A donor has accepted your request."
+
+                */
+
+
+            }
+
+        }
+
+
+        /* ================= DISMISS ALERT ================= */
+
+        function dismissAlert(id) {
+
+
+            const alertElement =
+                document.getElementById(id);
+
+
+            if (alertElement) {
+
+                alertElement.remove();
+
+                updateAlertCount();
+
+            }
+
+        }
+
+
+        /* ================= MARK ALL READ ================= */
+
+        function markAllRead() {
+
+
+            const alerts =
+                document.querySelectorAll(
+                    ".alert-item.unread"
+                );
+
+
+            alerts.forEach(function(alert) {
+
+                alert.classList.remove("unread");
+
+            });
+
+
+            updateAlertCount();
+
+
+            alert(
+                "All alerts have been marked as read."
+            );
+
+        }
+
+
+        /* ================= UPDATE COUNT ================= */
+
+        function updateAlertCount() {
+
+
+            const unread =
+                document.querySelectorAll(
+                    ".alert-item.unread"
+                ).length;
+
+
+            document.getElementById(
+                "topBadge"
+            ).textContent = unread;
+
+
+            document.getElementById(
+                "sidebarCount"
+            ).textContent = unread;
+
+
+            document.getElementById(
+                "totalAlerts"
+            ).textContent = unread;
+
+        }
+
+
+        /* ================= FILTER ================= */
+
+        function filterAlerts() {
+
+
+            const filter =
+                document.getElementById(
+                    "alertFilter"
+                ).value;
+
+
+            const alerts =
+                document.querySelectorAll(
+                    ".alert-item"
+                );
+
+
+            let visibleCount = 0;
+
+
+            alerts.forEach(function(alert) {
+
+
+                const type =
+                    alert.getAttribute(
+                        "data-type"
+                    );
+
+
+                if (
+                    filter === "all" ||
+                    type === filter ||
+                    (filter === "blood" && type === "urgent")
+                ) {
+
+                    alert.style.display = "flex";
+
+                    visibleCount++;
+
+                } else {
+
+                    alert.style.display = "none";
+
+                }
+
+            });
+
+
+            const emptyState =
+                document.getElementById(
+                    "emptyState"
+                );
+
+
+            if (visibleCount === 0) {
+
+                emptyState.style.display =
+                    "block";
+
+            } else {
+
+                emptyState.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* ================= SCROLL ================= */
+
+        function scrollToAlerts() {
+
+            document
+                .getElementById("alertsSection")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /* ================= LOGOUT ================= */
+
+        function logout() {
+
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (confirmLogout) {
+
+                // Later: Supabase Auth signOut()
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+
+
+        /* ================= INITIAL COUNT ================= */
+
+        updateAlertCount();
+
+
+    </script>
+    <script type="module" src="java/supabase.js"></script>
+<script type="module" src="java/alerts.js"></script>
+
+</body>
+
+</html>

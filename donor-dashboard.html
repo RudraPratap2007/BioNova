@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Dashboard | BloodLink</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f7f7f8;
+            color: #171717;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 245px;
+            height: 100vh;
+
+            background: #111;
+            color: white;
+
+            padding: 25px 16px;
+
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #ff4a50;
+
+            font-size: 23px;
+            font-weight: 800;
+
+            padding: 0 10px;
+            margin-bottom: 40px;
+        }
+
+        .logo i {
+            font-size: 26px;
+        }
+
+        .menu-title {
+            color: #777;
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            padding: 0 12px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 13px 12px;
+
+            border-radius: 9px;
+
+            color: #aaa;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #d71920;
+            color: white;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 16px;
+            right: 16px;
+        }
+
+        .sidebar-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px;
+
+            color: #999;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .sidebar-bottom a:hover {
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 245px;
+            min-height: 100vh;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+            height: 75px;
+
+            background: white;
+            border-bottom: 1px solid #eee;
+
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 900;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            border: none;
+            background: none;
+
+            font-size: 21px;
+        }
+
+        .page-title h1 {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .page-title p {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification {
+            position: relative;
+
+            border: none;
+            background: none;
+
+            font-size: 18px;
+            color: #555;
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: -6px;
+            right: -7px;
+
+            width: 16px;
+            height: 16px;
+
+            background: #d71920;
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donor-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-icon {
+            width: 38px;
+            height: 38px;
+
+            background: #ffe6e7;
+            color: #d71920;
+
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+        }
+
+        .profile-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .profile-status {
+            font-size: 9px;
+            color: #28a745;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 30px;
+            max-width: 1400px;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            background:
+                linear-gradient(
+                    120deg,
+                    #d71920,
+                    #a50f15
+                );
+
+            color: white;
+
+            border-radius: 18px;
+
+            padding: 28px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            color: rgba(255,255,255,0.78);
+            font-size: 12px;
+        }
+
+        .blood-badge {
+            background: rgba(255,255,255,0.15);
+
+            padding: 10px 16px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid #eee;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 11px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .stat-card h3 {
+            font-size: 22px;
+        }
+
+        .stat-card p {
+            color: #999;
+            font-size: 10px;
+        }
+
+        /* ================= GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns: 1.4fr 0.8fr;
+
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+
+            border: 1px solid #eee;
+
+            border-radius: 15px;
+
+            padding: 23px;
+
+            margin-bottom: 22px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+        }
+
+        .view-all {
+            color: #d71920;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* ================= BLOOD REQUEST ================= */
+
+        .request-card {
+            border: 1px solid #eee;
+            border-radius: 13px;
+
+            padding: 18px;
+
+            margin-bottom: 14px;
+
+            transition: 0.25s;
+        }
+
+        .request-card:hover {
+            border-color: #ffc5c7;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .request-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+        .hospital-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .hospital-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 10px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hospital-info h4 {
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .hospital-info p {
+            color: #999;
+            font-size: 9px;
+        }
+
+        .urgent {
+            padding: 5px 9px;
+
+            border-radius: 50px;
+
+            background: #ffe4e4;
+            color: #d71920;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .request-details {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            background: #fafafa;
+
+            border-radius: 9px;
+
+            padding: 12px;
+
+            margin-bottom: 13px;
+        }
+
+        .detail span {
+            display: block;
+
+            color: #999;
+
+            font-size: 8px;
+
+            margin-bottom: 3px;
+        }
+
+        .detail strong {
+            font-size: 11px;
+        }
+
+        .blood-type {
+            color: #d71920;
+
+            font-weight: 800;
+        }
+
+        .request-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .distance {
+            color: #777;
+            font-size: 9px;
+        }
+
+        .accept-btn {
+            border: none;
+
+            background: #d71920;
+            color: white;
+
+            padding: 10px 17px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            transition: 0.3s;
+        }
+
+        .accept-btn:hover {
+            background: #b51218;
+        }
+
+        /* ================= NOTIFICATIONS ================= */
+
+        .alert {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 12px;
+
+            background: #fafafa;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+        }
+
+        .alert:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-icon {
+            width: 32px;
+            height: 32px;
+
+            border-radius: 8px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+        }
+
+        .alert h4 {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .alert p {
+            color: #999;
+            font-size: 9px;
+        }
+
+        /* ================= AVAILABILITY ================= */
+
+        .availability {
+            background: #f8f8f8;
+
+            border-radius: 12px;
+
+            padding: 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .availability h3 {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .availability p {
+            color: #999;
+            font-size: 9px;
+        }
+
+        .switch {
+            position: relative;
+
+            width: 45px;
+            height: 24px;
+
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+
+            inset: 0;
+
+            background: #ccc;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            left: 3px;
+            top: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            transition: 0.3s;
+        }
+
+        .switch input:checked + .slider {
+            background: #28a745;
+        }
+
+        .switch input:checked + .slider:before {
+            transform: translateX(21px);
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #eee;
+
+            font-size: 11px;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-item span:first-child {
+            color: #999;
+        }
+
+        .profile-item span:last-child {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* ================= HISTORY ================= */
+
+        .history-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-icon {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 9px;
+
+            background: #e9f8ed;
+            color: #28a745;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-info h4 {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .history-info p {
+            color: #999;
+            font-size: 9px;
+        }
+
+        .completed {
+            color: #28a745;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                left: -245px;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .welcome {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-name {
+                display: none;
+            }
+
+            .request-details {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .request-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .accept-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-droplet"></i>
+
+            BloodLink
+
+        </a>
+
+
+        <div class="menu-title">
+            Donor Panel
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="#" class="active">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Dashboard
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#requests">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                    Blood Requests
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#notifications">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                    Alerts
+
+                    <span
+                        style="
+                        margin-left:auto;
+                        background:#d71920;
+                        padding:3px 6px;
+                        border-radius:10px;
+                        font-size:9px;">
+                        3
+                    </span>
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#history">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    Donation History
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#profile">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    My Profile
+
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                Back to Website
+
+            </a>
+
+
+            <a href="#" onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- ================= TOPBAR ================= -->
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;gap:15px;">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>Donor Dashboard</h1>
+
+                    <p>
+                        Help save lives by responding to blood requests
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    class="notification"
+                    onclick="showNotifications()">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-badge">
+                        3
+                    </span>
+
+                </button>
+
+
+                <div class="donor-profile">
+
+                    <div class="profile-icon">
+                        RS
+                    </div>
+
+
+                
+
+                    </div>\\
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <section class="welcome">
+
+                <div>
+
+                    <!-- <h2>
+                        Welcome, Rahul 👋
+                    </h2> -->
+
+                    <p>
+                        Thank you for being a blood donor. Your help can save lives.
+                    </p>
+
+                </div>
+
+
+                <div class="blood-badge">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                    Blood Group: O+
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STATS ================= -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>3</h3>
+
+                        <p>
+                            Matching Requests
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>6</h3>
+
+                        <p>
+                            Donations Made
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>92</h3>
+
+                        <p>
+                            Days Since Last Donation
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>6</h3>
+
+                        <p>
+                            Lives Helped
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= GRID ================= -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- ================= LEFT ================= -->
+
+                <div>
+
+
+                    <!-- BLOOD REQUESTS -->
+
+                    <section class="card" id="requests">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Blood Requests Near You
+                            </h3>
+
+                            <a href="#" class="view-all">
+                                View All
+                            </a>
+
+                        </div>
+
+
+                        <!-- REQUEST 1 -->
+
+                        <div class="request-card">
+
+                            <div class="request-top">
+
+                                <div class="hospital-info">
+
+                                    <div class="hospital-icon">
+
+                                        <i class="fa-solid fa-hospital"></i>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <h4>
+                                            City Care Hospital
+                                        </h4>
+
+                                        <p>
+                                            Jaipur • 15 min ago
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <span class="urgent">
+                                    URGENT
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-details">
+
+                                <div class="detail">
+
+                                    <span>
+                                        Blood Group
+                                    </span>
+
+                                    <strong class="blood-type">
+                                        O+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Required
+                                    </span>
+
+                                    <strong>
+                                        2 Units
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Patient
+                                    </span>
+
+                                    <strong>
+                                        Emergency
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="request-bottom">
+
+                                <span class="distance">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    3.2 km away
+
+                                </span>
+
+
+                                <button
+                                    class="accept-btn"
+                                    onclick="acceptRequest('City Care Hospital','O+')">
+
+                                    Accept Request
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REQUEST 2 -->
+
+                        <div class="request-card">
+
+                            <div class="request-top">
+
+                                <div class="hospital-info">
+
+                                    <div class="hospital-icon">
+
+                                        <i class="fa-solid fa-hospital"></i>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <h4>
+                                            Sunrise Medical Centre
+                                        </h4>
+
+                                        <p>
+                                            Jaipur • 32 min ago
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <span class="urgent">
+                                    URGENT
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-details">
+
+                                <div class="detail">
+
+                                    <span>
+                                        Blood Group
+                                    </span>
+
+                                    <strong class="blood-type">
+                                        O+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Required
+                                    </span>
+
+                                    <strong>
+                                        1 Unit
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Patient
+                                    </span>
+
+                                    <strong>
+                                        Surgery
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="request-bottom">
+
+                                <span class="distance">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    5.7 km away
+
+                                </span>
+
+
+                                <button
+                                    class="accept-btn"
+                                    onclick="acceptRequest('Sunrise Medical Centre','O+')">
+
+                                    Accept Request
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REQUEST 3 -->
+
+                        <div class="request-card">
+
+                            <div class="request-top">
+
+                                <div class="hospital-info">
+
+                                    <div class="hospital-icon">
+
+                                        <i class="fa-solid fa-hospital"></i>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <h4>
+                                            Government Hospital
+                                        </h4>
+
+                                        <p>
+                                            Jaipur • 1 hour ago
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <span
+                                    style="
+                                    padding:5px 9px;
+                                    border-radius:50px;
+                                    background:#fff4d8;
+                                    color:#b27a00;
+                                    font-size:9px;
+                                    font-weight:800;">
+                                    NORMAL
+                                </span>
+
+                            </div>
+
+
+                            <div class="request-details">
+
+                                <div class="detail">
+
+                                    <span>
+                                        Blood Group
+                                    </span>
+
+                                    <strong class="blood-type">
+                                        O+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Required
+                                    </span>
+
+                                    <strong>
+                                        1 Unit
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <span>
+                                        Patient
+                                    </span>
+
+                                    <strong>
+                                        Treatment
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="request-bottom">
+
+                                <span class="distance">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    8.1 km away
+
+                                </span>
+
+
+                                <button
+                                    class="accept-btn"
+                                    onclick="acceptRequest('Government Hospital','O+')">
+
+                                    Accept Request
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- DONATION HISTORY -->
+
+                    <section class="card" id="history">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Recent Donation History
+                            </h3>
+
+                            <a href="#" class="view-all">
+                                View All
+                            </a>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <div class="history-icon">
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </div>
+
+
+                            <div class="history-info">
+
+                                <h4>
+                                    City Care Hospital
+                                </h4>
+
+                                <p>
+                                    O+ • 2 Units • 12 June 2026
+                                </p>
+
+                            </div>
+
+
+                            <span class="completed">
+                                COMPLETED
+                            </span>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <div class="history-icon">
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </div>
+
+
+                            <div class="history-info">
+
+                                <h4>
+                                    Sunrise Medical Centre
+                                </h4>
+
+                                <p>
+                                    O+ • 1 Unit • 05 March 2026
+                                </p>
+
+                            </div>
+
+
+                            <span class="completed">
+                                COMPLETED
+                            </span>
+
+                        </div>
+
+
+                        <div class="history-item">
+
+                            <div class="history-icon">
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </div>
+
+
+                            <div class="history-info">
+
+                                <h4>
+                                    Government Hospital
+                                </h4>
+
+                                <p>
+                                    O+ • 1 Unit • 20 December 2025
+                                </p>
+
+                            </div>
+
+
+                            <span class="completed">
+                                COMPLETED
+                            </span>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- ================= RIGHT ================= -->
+
+                <div>
+
+
+                    <!-- ALERTS -->
+
+                    <section class="card" id="notifications">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Alerts
+                            </h3>
+
+                            <a href="#" class="view-all">
+                                Mark all read
+                            </a>
+
+                        </div>
+
+
+                        <div class="alert">
+
+                            <div class="alert-icon">
+
+                                <i class="fa-solid fa-droplet"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    New O+ blood request
+                                </h4>
+
+                                <p>
+                                    City Care Hospital needs O+ blood nearby.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alert">
+
+                            <div class="alert-icon">
+
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Urgent requirement
+                                </h4>
+
+                                <p>
+                                    A nearby hospital has marked a request urgent.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alert">
+
+                            <div class="alert-icon">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Donation completed
+                                </h4>
+
+                                <p>
+                                    Your previous donation was recorded successfully.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- AVAILABILITY -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h3>
+                                Donation Availability
+                            </h3>
+
+                        </div>
+
+
+                        <div class="availability">
+
+                            <div>
+
+                                <h3>
+                                    Available for requests
+                                </h3>
+
+                                <p>
+                                    Receive alerts for matching blood requests.
+                                </p>
+
+                            </div>
+
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="availability"
+                                    checked
+                                    onchange="changeAvailability()">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- PROFILE -->
+
+                    <section class="card" id="profile">
+
+                        <div class="card-header">
+
+                            <h3>
+                                My Profile
+                            </h3>
+
+                            <a href="#" class="view-all">
+                                Edit
+                            </a>
+
+                        </div>
+
+
+                        <div class="profile-item">
+
+                            <span>
+                                Name
+                            </span>
+
+                            <span>
+                                Rahul Sharma
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-item">
+
+                            <span>
+                                Blood Group
+                            </span>
+
+                            <span style="color:#d71920;">
+                                O+
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-item">
+
+                            <span>
+                                Location
+                            </span>
+
+                            <span>
+                                Jaipur
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-item">
+
+                            <span>
+                                Mobile
+                            </span>
+
+                            <span>
+                                +91 XXXXX XXXXX
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-item">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <span style="color:#28a745;">
+                                Available
+                            </span>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        // ================= MOBILE SIDEBAR =================
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            sidebar.classList.toggle("open");
+
+        }
+
+
+        // ================= ACCEPT REQUEST =================
+
+        function acceptRequest(hospital, bloodGroup) {
+
+            const confirmAccept =
+                confirm(
+                    "Accept blood request from " +
+                    hospital +
+                    " for " +
+                    bloodGroup +
+                    " blood?"
+                );
+
+            if (confirmAccept) {
+
+                alert(
+                    "Request accepted!\n\n" +
+                    hospital +
+                    " has been notified that you are willing to donate."
+                );
+
+                /*
+                    SUPABASE LOGIC WILL BE ADDED HERE.
+
+                    Later:
+
+                    1. Save donor ID
+                    2. Save request ID
+                    3. Set response = "accepted"
+                    4. Notify hospital
+                */
+
+            }
+
+        }
+
+
+        // ================= AVAILABILITY =================
+
+        function changeAvailability() {
+
+            const checkbox =
+                document.getElementById("availability");
+
+            if (checkbox.checked) {
+
+                alert(
+                    "You are now available for blood requests."
+                );
+
+            } else {
+
+                alert(
+                    "You will not receive new blood request alerts."
+                );
+
+            }
+
+            /*
+                Later this value will be updated
+                in Supabase.
+
+                available = true / false
+            */
+
+        }
+
+
+        // ================= NOTIFICATIONS =================
+
+        function showNotifications() {
+
+            alert(
+                "You have 3 new alerts.\n\n" +
+                "• New O+ blood request\n" +
+                "• Urgent blood requirement\n" +
+                "• Previous donation completed"
+            );
+
+        }
+
+
+        // ================= LOGOUT =================
+
+        function logout() {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+            if (confirmLogout) {
+
+                // Later: Supabase Auth signOut()
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+
+    </script>
+<script type="module" src="java/supabase.js"></script>
+<script type="module">import { requireLogin } from "./java/auth.js"; await requireLogin();</script>
+</body>
+</html>

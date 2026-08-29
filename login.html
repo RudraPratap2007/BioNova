@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | BloodLink</title>
+
+    <meta name="description"
+          content="Login to your BloodLink donor or hospital account.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at 10% 20%, #ffe1e2, transparent 28%),
+                radial-gradient(circle at 90% 80%, #ffd8da, transparent 25%),
+                #fffafa;
+
+            color: #171717;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 75px;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid #eeeeee;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+
+            margin: auto;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            color: #d71920;
+
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo i {
+            font-size: 27px;
+        }
+
+        .back-home {
+            color: #555;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: #d71920;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .login-section {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* ================= LOGIN CONTAINER ================= */
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 950px;
+
+            min-height: 560px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(100, 0, 0, 0.12);
+
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+        }
+
+
+        /* ================= LEFT SIDE ================= */
+
+        .login-info {
+            background:
+                linear-gradient(
+                    145deg,
+                    #d71920,
+                    #9d0d13
+                );
+
+            color: white;
+
+            padding: 50px 40px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .login-info::before {
+            content: "";
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.07);
+
+            position: absolute;
+
+            top: -90px;
+            right: -90px;
+        }
+
+        .login-info::after {
+            content: "";
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.05);
+
+            position: absolute;
+
+            bottom: -60px;
+            left: -60px;
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-icon {
+            width: 65px;
+            height: 65px;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 25px;
+        }
+
+        .login-info h1 {
+            font-size: 38px;
+
+            line-height: 1.15;
+
+            margin-bottom: 15px;
+        }
+
+        .login-info p {
+            color: rgba(255,255,255,0.8);
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .benefit i {
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= RIGHT SIDE ================= */
+
+        .login-form-area {
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 30px;
+
+            margin-bottom: 7px;
+        }
+
+        .form-header p {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= ACCOUNT TYPE ================= */
+
+        .account-types {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 25px;
+        }
+
+        .account-type {
+            border: 1px solid #ddd;
+
+            background: white;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #555;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .account-type i {
+            margin-right: 6px;
+        }
+
+        .account-type:hover {
+            border-color: #d71920;
+
+            color: #d71920;
+        }
+
+        .account-type.active {
+            background: #fff0f1;
+
+            border-color: #d71920;
+
+            color: #d71920;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            color: #333;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #999;
+
+            font-size: 15px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+
+            height: 50px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 0 45px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #d71920;
+
+            box-shadow:
+                0 0 0 3px rgba(215,25,32,0.08);
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            color: #999;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= OPTIONS ================= */
+
+        .form-options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            font-size: 12px;
+        }
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #666;
+        }
+
+        .remember input {
+            accent-color: #d71920;
+        }
+
+        .forgot {
+            color: #d71920;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-submit {
+            width: 100%;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #d71920;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            box-shadow:
+                0 10px 25px rgba(215,25,32,0.2);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-submit:hover {
+            background: #b81218;
+
+            transform: translateY(-2px);
+        }
+
+        .login-submit:disabled {
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* ================= REGISTER ================= */
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .register-text a {
+            color: #d71920;
+
+            font-weight: 800;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+
+                max-width: 520px;
+            }
+
+            .login-info {
+                display: none;
+            }
+
+            .login-form-area {
+                padding: 45px 35px;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .nav-container {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .back-home {
+                font-size: 12px;
+            }
+
+            .login-section {
+                padding: 25px 15px;
+            }
+
+            .login-form-area {
+                padding: 35px 22px;
+            }
+
+            .form-header h2 {
+                font-size: 26px;
+            }
+
+            .account-types {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <i class="fa-solid fa-droplet"></i>
+
+                BloodLink
+
+            </a>
+
+
+            <a href="index.html" class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Home
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <main class="login-section">
+
+        <div class="login-wrapper">
+
+
+            <!-- LEFT INFORMATION PANEL -->
+
+            <section class="login-info">
+
+                <div class="info-content">
+
+                    <div class="info-icon">
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                    </div>
+
+
+                    <h1>
+
+                        Welcome<br>
+
+                        Back.
+
+                    </h1>
+
+
+                    <p>
+
+                        Login to your BloodLink account and stay connected
+                        with your blood donation community.
+
+                    </p>
+
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>
+
+                            Secure & Verified Accounts
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                        <span>
+
+                            Receive Blood Requirement Alerts
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+
+                        <span>
+
+                            Help Save Lives
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <section class="login-form-area">
+
+
+                <div class="form-header">
+
+                    <h2>
+
+                        Login to BloodLink
+
+                    </h2>
+
+
+                    <p>
+
+                        Select your account type and enter your details.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ACCOUNT TYPE -->
+
+                <div class="account-types">
+
+
+                    <button
+                        type="button"
+                        class="account-type active"
+                        id="donorType"
+                        onclick="selectAccount('donor')">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Donor
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-type"
+                        id="hospitalType"
+                        onclick="selectAccount('hospital')">
+
+                        <i class="fa-solid fa-hospital"></i>
+
+                        Hospital
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            Email Address
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()">
+
+                                <i
+                                    class="fa-solid fa-eye"
+                                    id="eyeIcon">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="form-options">
+
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot"
+                            onclick="return false;"
+                        >
+
+                            Forgot Password?
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-submit"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Login
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <p class="register-text">
+
+                    Don't have an account?
+
+                    <a href="donor-registration.html">
+
+                        Register as Donor
+
+                    </a>
+
+                </p>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= PAGE JAVASCRIPT ================= -->
+
+    <script>
+
+        window.accountType = "donor";
+
+
+        /* ===============================
+           SELECT ACCOUNT
+        =============================== */
+
+        function selectAccount(type) {
+
+            window.accountType = type;
+
+
+            const donorButton =
+                document.getElementById("donorType");
+
+            const hospitalButton =
+                document.getElementById("hospitalType");
+
+
+            if (type === "donor") {
+
+                donorButton.classList.add("active");
+
+                hospitalButton.classList.remove("active");
+
+            }
+
+            else {
+
+                hospitalButton.classList.add("active");
+
+                donorButton.classList.remove("active");
+
+            }
+
+        }
+
+
+        /* ===============================
+           TOGGLE PASSWORD
+        =============================== */
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("eyeIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+    </script>
+
+
+    <!-- ================= SUPABASE ================= -->
+
+    <script
+        type="module"
+        src="java/supabase.js">
+    </script>
+
+
+    <!-- ================= AUTHENTICATION ================= -->
+
+    <script
+        type="module"
+        src="java/auth.js">
+    </script>
+
+
+</body>
+
+</html>

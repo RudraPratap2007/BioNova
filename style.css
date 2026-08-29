@@ -1,0 +1,224 @@
+/* ================================
+   BLOODLINK - SAFE COMMON CSS
+   ================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+
+    /* Modern BloodLink background */
+    background:
+        radial-gradient(circle at 10% 15%,
+            rgba(239, 68, 68, 0.22),
+            transparent 28%),
+
+        radial-gradient(circle at 90% 20%,
+            rgba(244, 63, 94, 0.18),
+            transparent 25%),
+
+        radial-gradient(circle at 50% 100%,
+            rgba(220, 38, 38, 0.15),
+            transparent 35%),
+
+        linear-gradient(
+            135deg,
+            #fff1f2 0%,
+            #ffffff 45%,
+            #fff7ed 100%
+        );
+
+    min-height: 100vh;
+}
+
+/* Modern glass effect for common containers
+   Only works if your HTML uses these classes */
+
+.glass,
+.card,
+.info-card,
+.feature-card,
+.dashboard-card,
+.request-card,
+.alert-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(220, 38, 38, 0.12);
+
+    box-shadow:
+        0 10px 30px rgba(127, 29, 29, 0.08);
+
+    border-radius: 18px;
+}
+
+/* Common BloodLink buttons */
+
+.btn,
+.btn-primary,
+.primary-btn {
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #b91c1c
+    );
+
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+    padding: 12px 22px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+
+    box-shadow:
+        0 8px 20px rgba(185, 28, 28, 0.22);
+}
+
+.btn:hover,
+.btn-primary:hover,
+.primary-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(185, 28, 28, 0.30);
+}
+
+/* Secondary button */
+
+.btn-secondary,
+.secondary-btn {
+    background: white;
+    color: #b91c1c;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 10px;
+
+    padding: 11px 21px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.btn-secondary:hover,
+.secondary-btn:hover {
+    background: #fff1f2;
+    transform: translateY(-2px);
+}
+
+/* Blood group badge */
+
+.blood-group,
+.blood-badge {
+    display: inline-block;
+
+    background: #fee2e2;
+    color: #991b1b;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-weight: 800;
+}
+
+/* Alert badge */
+
+.notification-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 20px;
+    height: 20px;
+
+    padding: 2px 6px;
+
+    background: #dc2626;
+    color: white;
+
+    border-radius: 50px;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Urgency */
+
+.urgency {
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.urgency.critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.urgency.high {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.urgency.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.urgency.low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* Alert cards */
+
+.alert-card {
+    padding: 20px;
+    margin-bottom: 15px;
+
+    border-left: 5px solid #dc2626;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    body {
+        background:
+            radial-gradient(
+                circle at top,
+                rgba(239, 68, 68, 0.18),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #fff1f2,
+                #ffffff
+            );
+    }
+
+}

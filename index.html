@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BloodLink | Every Drop Connects a Life</title>
+
+    <meta name="description"
+          content="BloodLink connects blood donors with hospitals and patients in need of blood.">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: #171717;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 16px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 23px;
+            font-weight: 800;
+            color: #d71920;
+        }
+
+        .logo i {
+            font-size: 27px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d71920;
+        }
+
+        .login-btn {
+            background: #111;
+            color: white !important;
+            padding: 10px 19px;
+            border-radius: 8px;
+        }
+
+        .login-btn:hover {
+            background: #d71920;
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: none;
+            font-size: 24px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+            background:
+                radial-gradient(circle at 85% 20%, #ffdfe0 0%, transparent 28%),
+                linear-gradient(135deg, #fff5f5, #ffffff 55%);
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 70px 25px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+            border-radius: 50px;
+
+            background: #ffe5e6;
+            color: #c5161d;
+
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #d71920;
+        }
+
+        .hero-text {
+            max-width: 580px;
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #d71920;
+            color: white;
+            box-shadow: 0 8px 20px rgba(215, 25, 32, 0.2);
+        }
+
+        .primary-btn:hover {
+            background: #b51218;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #222;
+            border: 1px solid #ddd;
+        }
+
+        .secondary-btn:hover {
+            border-color: #d71920;
+            color: #d71920;
+        }
+
+        /* HERO VISUAL */
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .blood-card {
+            width: 360px;
+            height: 420px;
+
+            background: linear-gradient(145deg, #d71920, #9f0d13);
+            border-radius: 35px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            box-shadow: 0 30px 70px rgba(120, 0, 0, 0.25);
+
+            transform: rotate(3deg);
+        }
+
+        .blood-drop {
+            width: 130px;
+            height: 165px;
+
+            background: white;
+
+            border-radius: 70% 70% 65% 65%;
+            transform: rotate(45deg);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+
+            margin-bottom: 40px;
+        }
+
+        .blood-drop i {
+            color: #d71920;
+            font-size: 52px;
+            transform: rotate(-45deg);
+        }
+
+        .blood-card h3 {
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .blood-card p {
+            opacity: 0.85;
+            font-size: 14px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            color: #222;
+
+            padding: 15px 18px;
+            border-radius: 12px;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .floating-card i {
+            color: #d71920;
+            font-size: 20px;
+        }
+
+        .card-one {
+            top: 40px;
+            left: 0;
+        }
+
+        .card-two {
+            bottom: 50px;
+            right: -10px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            max-width: 1050px;
+            margin: -35px auto 0;
+            position: relative;
+            z-index: 5;
+
+            background: white;
+            border-radius: 18px;
+
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            padding: 25px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+            border-right: 1px solid #eee;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h2 {
+            color: #d71920;
+            font-size: 30px;
+        }
+
+        .stat p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 100px 25px;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-heading .small-title {
+            color: #d71920;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            font-size: 38px;
+            margin: 8px 0 12px;
+        }
+
+        .section-heading p {
+            color: #777;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* ================= CARDS ================= */
+
+        .role-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .role-card {
+            padding: 35px;
+            border: 1px solid #eee;
+            border-radius: 18px;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .role-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+            border-color: #ffd1d3;
+        }
+
+        .icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 13px;
+
+            background: #ffe8e9;
+            color: #d71920;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+            margin-bottom: 22px;
+        }
+
+        .role-card h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .role-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: #d71920;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .how-section {
+            background: #fafafa;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .step {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #eee;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+            background: #d71920;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ================= EMERGENCY ================= */
+
+        .emergency {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 55px 60px;
+
+            border-radius: 25px;
+
+            background: linear-gradient(120deg, #d71920, #a70f15);
+
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .emergency h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .emergency p {
+            opacity: 0.85;
+            max-width: 600px;
+        }
+
+        .emergency .secondary-btn {
+            white-space: nowrap;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111;
+            color: white;
+            margin-top: 100px;
+            padding: 55px 25px 25px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            color: #aaa;
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+
+            border-top: 1px solid #333;
+
+            color: #777;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                margin-top: 20px;
+            }
+
+            .stats {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .role-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .emergency {
+                margin: 0 20px;
+                padding: 40px 30px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-container {
+                padding-top: 55px;
+                padding-bottom: 80px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .blood-card {
+                width: 280px;
+                height: 350px;
+            }
+
+            .blood-drop {
+                width: 95px;
+                height: 125px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .section-heading h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-droplet"></i>
+                BloodLink
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#how">How It Works</a>
+                <a href="#contact">Contact</a>
+                <a href="alerts.html">
+    <i class="fa-solid fa-bell"></i>
+    Alerts
+</a>
+
+                <!-- Later connect to login.html -->
+                <a href="login.html" class="login-btn">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="badge">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        Connecting Donors With Those In Need
+                    </div>
+
+                    <h1>
+                        Every Drop
+                        <span>Connects</span>
+                        a Life.
+                    </h1>
+
+                    <p class="hero-text">
+                        BloodLink is a smart blood donation platform that
+                        connects verified hospitals with eligible blood donors
+                        when blood is urgently needed.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <!-- Later connect to donor-registration.html -->
+                        <a href="donor-registration.html"
+                           class="primary-btn">
+                            <i class="fa-solid fa-hand-holding-droplet"></i>
+                            Become a Donor
+                        </a>
+
+                        <!-- Later connect to hospital-registration.html -->
+                        <a href="hospital-registration.html"
+                           class="secondary-btn">
+                            <i class="fa-solid fa-hospital"></i>
+                            Register Hospital
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO VISUAL -->
+
+                <div class="hero-visual">
+
+                    <div class="floating-card card-one">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>Donors Connected</span>
+                    </div>
+
+                    <div class="blood-card">
+
+                        <div class="blood-drop">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+
+                        <h3>Donate Blood</h3>
+                        <p>One donation can save lives.</p>
+
+                    </div>
+
+                    <div class="floating-card card-two">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Emergency Alerts</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats">
+
+            <div class="stat">
+                <h2>24/7</h2>
+                <p>Emergency Support</p>
+            </div>
+
+            <div class="stat">
+                <h2>8+</h2>
+                <p>Blood Groups</p>
+            </div>
+
+            <div class="stat">
+                <h2>1</h2>
+                <p>Mission — Save Lives</p>
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT / ROLES ================= -->
+
+        <section class="section" id="about">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="small-title">
+                        Who is BloodLink for?
+                    </div>
+
+                    <h2>
+                        One Platform. Two Lifelines.
+                    </h2>
+
+                    <p>
+                        BloodLink brings donors and verified hospitals
+                        together through a simple and fast platform.
+                    </p>
+
+                </div>
+
+
+                <div class="role-cards">
+
+                    <!-- DONOR -->
+
+                    <div class="role-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+
+                        <h3>For Blood Donors</h3>
+
+                        <p>
+                            Register your blood group and location.
+                            Receive alerts when a matching blood request
+                            is raised near you.
+                        </p>
+
+                        <a href="donor-registration.html"
+                           class="card-link">
+                            Register as Donor →
+                        </a>
+
+                    </div>
+
+
+                    <!-- HOSPITAL -->
+
+                    <div class="role-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-hospital-user"></i>
+                        </div>
+
+                        <h3>For Hospitals</h3>
+
+                        <p>
+                            Verified hospitals can submit blood requirements
+                            and connect with matching registered donors.
+                        </p>
+
+                        <a href="hospital-registration.html"
+                           class="card-link">
+                            Register Hospital →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="section how-section" id="how">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="small-title">
+                        Simple Process
+                    </div>
+
+                    <h2>How BloodLink Works</h2>
+
+                    <p>
+                        Getting the right blood to the right place
+                        shouldn't be complicated.
+                    </p>
+
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step">
+
+                        <div class="step-number">01</div>
+
+                        <h3>Register</h3>
+
+                        <p>
+                            Donors and hospitals create their verified
+                            profiles on BloodLink.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">02</div>
+
+                        <h3>Request Blood</h3>
+
+                        <p>
+                            A verified hospital submits a blood requirement
+                            with blood group, location and urgency.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">03</div>
+
+                        <h3>Connect & Respond</h3>
+
+                        <p>
+                            Matching donors receive an alert and can
+                            choose to respond to the request.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EMERGENCY ================= -->
+
+        <section class="section">
+
+            <div class="emergency">
+
+                <div>
+
+                    <h2>Someone needs blood urgently?</h2>
+
+                    <p>
+                        Verified hospitals can raise a blood request
+                        and connect with matching donors.
+                    </p>
+
+                </div>
+
+                <!-- Later connect to blood-request.html -->
+                <a href="blood-request.html"
+                   class="secondary-btn">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    I Need Blood
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <div class="footer-container">
+
+            <div class="footer-about">
+
+                <div class="footer-logo">
+                    <i class="fa-solid fa-droplet"></i>
+                    BloodLink
+                </div>
+
+                <p>
+                    A technology-driven platform designed to connect
+                    blood donors with verified hospitals and help make
+                    blood availability faster and more accessible.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Quick Links</h4>
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#how">How It Works</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Get Started</h4>
+
+                <a href="donor-registration.html">
+                    Become a Donor
+                </a>
+
+                <a href="hospital-registration.html">
+                    Register Hospital
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 BloodLink. Built to connect people and save lives.
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function toggleMenu() {
+
+            const nav = document.querySelector(".nav-links");
+
+            if (nav.style.display === "flex") {
+                nav.style.display = "none";
+            } else {
+                nav.style.display = "flex";
+                nav.style.flexDirection = "column";
+                nav.style.position = "absolute";
+                nav.style.top = "70px";
+                nav.style.right = "20px";
+                nav.style.background = "white";
+                nav.style.padding = "20px";
+                nav.style.borderRadius = "12px";
+                nav.style.boxShadow = "0 15px 40px rgba(0,0,0,0.12)";
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
